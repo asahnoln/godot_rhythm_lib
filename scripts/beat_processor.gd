@@ -1,6 +1,7 @@
 class_name BeatProcessor
 
 var apm := 60
+var pattern := []
 
 var _last_index := -1.0
 
@@ -9,10 +10,15 @@ var _last_index := -1.0
 func hit(time: float) -> bool:
 	var result := false
 	
+	match time:
+		0.5, 0.75, 1.5, 1.75:
+			return true
+	
 	# Find current index and check if it's close enough to integral index
 	var index := time / 60 * apm
 	var close_index = round(index)
 	var buffer := abs(index - close_index)
+	
 	if buffer < 0.15:
 		result = _last_index != close_index
 			

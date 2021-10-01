@@ -46,4 +46,9 @@ func test_beat_on_given_pattern():
 	bp.apm = 60
 	bp.pattern = [2, 1, 1]
 	
+	asserts.is_true(bp.hit(0.5), "Hit should be registered on second pattern sol")
 	asserts.is_true(bp.hit(0.75), "Hit should be registered on third pattern sol")
+	asserts.is_true(bp.hit(1.5), "Hit should be registered on second pattern sol in second cycle")
+	asserts.is_true(bp.hit(1.75), "Hit should be registered on third pattern sol in second cycle")
+	
+	
