@@ -7,10 +7,11 @@ extends Node2D
 var bp := BeatProcessor.new()
 
 onready var _audio := $AudioStreamPlayer
+onready var _tween := $Tween
 
 func _init() -> void:
 	bp.apm = 120
-	bp.pattern = [2, 2]
+	bp.pattern = [4]
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

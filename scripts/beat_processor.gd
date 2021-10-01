@@ -25,6 +25,11 @@ func hit(time: float) -> bool:
 	_last_index = close_index
 	return result
 
+
+func update_time(time: float) -> void:
+	pass
+	
+
 # Update matra length
 func _set_apm(value: float) -> void:
 	apm = value

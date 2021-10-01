@@ -113,3 +113,7 @@ func test_beat_on_given_pattern():
 		for tt in tests[pattern]:
 			asserts.is_equal(bp.hit(tt["time"]), tt["want"], tt["desc"])
 		
+		
+func test_pattern_sols_send_signals() -> void:
+	bp.update_time(0)
+	asserts.signal_was_emitted(bp, "sol_changed", "Await sol changed signal on first beat")
