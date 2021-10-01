@@ -55,7 +55,7 @@ func test_beat_on_given_pattern():
 	asserts.is_true(bp.hit(1.75), "Hit should be registered on third pattern sol in second cycle")
 	asserts.is_false(bp.hit(0.25), "Miss should be registered on second pattern sol in first cycle")
 	
-#	bp.pattern = [1, 2, 1]
-#	asserts.is_false(bp.hit(0.5), "Miss should be registered on second pattern sol in first cycle")
-	
+	bp.pattern = [1, 2, 1]
+	asserts.is_false(bp.hit(0.5), "Miss should be registered on second pattern sol in first cycle")
+	asserts.is_true(bp.hit(1.75), "Hit should be registered on third pattern sol in second cycle")
 	

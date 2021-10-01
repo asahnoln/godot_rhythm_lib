@@ -24,6 +24,10 @@ func hit(time: float) -> bool:
 			index = time / atcharam_length * 4
 			if int(index) % 4 == 1:
 				index -= 0.5
+		[1, 2, 1]:
+			index = time / atcharam_length * 4
+			if int(index) % 4 == 2:
+				index -= 0.5
 			
 	var close_index := round(index)
 	var buffer := abs(index - close_index)
