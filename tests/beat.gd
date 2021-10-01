@@ -1,5 +1,7 @@
 extends WAT.Test
 
+# TODO: Same hit time after pattern change counts as a miss! Should work on that?
+
 var bp: BeatProcessor
 
 
@@ -60,4 +62,6 @@ func test_beat_on_given_pattern():
 	asserts.is_true(bp.hit(1.75), "Advanced 2: Hit should be registered on third pattern sol in second cycle")
 	
 	bp.pattern = [1, 2, 1, 2, 1]
+	asserts.is_false(bp.hit(0.5), "Moving offbeat: Miss should be registered on second pattern sol in first cycle")
 	asserts.is_false(bp.hit(1.25), "Moving offbeat: Miss should be registered on fourth pattern sol in first cycle")
+	asserts.is_true(bp.hit(1.75), "Moving offbeat: Miss should be registered on second pattern sol in first cycle")		

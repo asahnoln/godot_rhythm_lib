@@ -12,24 +12,26 @@ func hit(time: float) -> bool:
 	var atcharam_length := 60.0 / apm
 	
 	# Find current index and check if it's close enough to integral index
-	var index := 0.0
+	var index := time / atcharam_length * 4
 	match pattern:
 		[4]:
-			index = time / atcharam_length
+			index /= 4
 		[2, 2]:
-			index = time / atcharam_length * 2
+			index /= 2
 		[1, 1, 1, 1]:
-			index = time / atcharam_length * 4
+			pass
 		[2, 1, 1]:
-			index = time / atcharam_length * 4
 			if int(index) % 4 == 1:
 				index -= 0.5
 		[1, 2, 1]:
-			index = time / atcharam_length * 4
 			if int(index) % 4 == 2:
+				index -= 0.5
+		[1, 2, 1, 2, 1]:
+			if int(index) % 7 in [2, 5]:
 				index -= 0.5
 			
 	var close_index := round(index)
+	print("last ", _last_index, " current ", index)
 	var buffer := abs(index - close_index)
 	if buffer < 0.15:
 		result = _last_index != close_index
