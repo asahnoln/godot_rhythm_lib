@@ -1,45 +1,46 @@
 class_name BeatProcessor
 
-var apm := 60.0
-var pattern := [4]
-
-var _last_index := -1.0
 const JATHI := 4
+
+var apm := 60.0 setget _set_apm
+var pattern := [4] setget _set_pattern
+
+var _last_index := -1
+var _matras_pattern := [true, false, false, false]
+var _matras_sum := 4
+var _matra_length := 60.0 / apm / JATHI
 
 
 # Register hit
 func hit(time: float) -> bool:
 	var result := false
-	var matra_length := 60.0 / apm / JATHI
 	
-	# Find current matra index and check if it's close enough to integral index
-	var index := time / matra_length # 4 is jathi (matras per atcharam)
-	var close_index := round(index)
+	var index := time / _matra_length
+	var close_index: int = round(index)
 	var buffer := abs(index - close_index)
-	var sum := 0
-	var matras := []
-	match pattern:
-		[4]:
-			matras = [true, false, false, false]
-			sum = 4
-		[2, 2]:
-			matras = [true, false, true, false]
-			sum = 4
-		[1, 1, 1, 1]:
-			matras = [true, true, true, true]
-			sum = 4
-		[2, 1, 1]:
-			matras = [true, false, true, true]
-			sum = 4
-		[1, 2, 1]:
-			matras = [true, true, false, true]
-			sum = 4
-		[1, 2, 1, 2, 1]:
-			matras = [1, 1, 0, 1, 1, 0, 1]
-			sum = 7
 
 	if buffer < 0.5:
-		result = _last_index != close_index and matras[int(close_index) % sum]
+		result = _last_index != close_index and _matras_pattern[close_index % _matras_sum]
 
 	_last_index = close_index
 	return result
+
+# Update matra length
+func _set_apm(value: float) -> void:
+	apm = value
+	_matra_length = 60.0 / apm / JATHI
+
+
+# Update pattern sum and matras pattern
+func _set_pattern(value: Array) -> void:
+	_matras_sum = 0
+	_matras_pattern = []
+	
+	for i in value:
+		_matras_sum += i
+		_matras_pattern.push_back(true)
+		for _i in i - 1:
+			_matras_pattern.push_back(false)
+	
+	pattern = value
+	

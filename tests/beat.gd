@@ -30,7 +30,6 @@ func test_register_hit_on_beat():
 	
 
 func test_register_miss_out_of_beat():
-	print('miss out of beat')
 	asserts.is_false(bp.hit(0.5), "Miss should be registered out of beat")
 	
 
@@ -42,7 +41,6 @@ func test_different_tempo_hit_on_beat():
 
 func test_buffer_to_hit():
 	bp.apm = 120
-	print('buffer to hit')	
 	asserts.is_true(bp.hit(9.477333), "Hit should be registered with enough buffer until real beat")
 	asserts.is_true(bp.hit(47.557335), "Hit should be registered with enough buffer after real beat")
 	
