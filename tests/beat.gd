@@ -45,17 +45,19 @@ func test_buffer_to_hit():
 func test_beat_on_given_pattern():
 	bp.apm = 60
 	bp.pattern = [2, 2]
-	asserts.is_true(bp.hit(0), "Hit should be registered on first pattern sol")
-	asserts.is_true(bp.hit(1.5), "Hit should be registered on second pattern sol")
+	asserts.is_true(bp.hit(0), "Simple pattern: Hit should be registered on first pattern sol")
+	asserts.is_true(bp.hit(1.5), "Simple pattern: Hit should be registered on second pattern sol")
 	
 	bp.pattern = [2, 1, 1]
-	asserts.is_true(bp.hit(0.5), "Hit should be registered on second pattern sol in first cycle")
-	asserts.is_true(bp.hit(0.75), "Hit should be registered on third pattern sol in first cycle")
-	asserts.is_true(bp.hit(1.5), "Hit should be registered on second pattern sol in second cycle")
-	asserts.is_true(bp.hit(1.75), "Hit should be registered on third pattern sol in second cycle")
-	asserts.is_false(bp.hit(0.25), "Miss should be registered on second pattern sol in first cycle")
+	asserts.is_true(bp.hit(0.5), "Advanced: Hit should be registered on second pattern sol in first cycle")
+	asserts.is_true(bp.hit(0.75), "Advanced: Hit should be registered on third pattern sol in first cycle")
+	asserts.is_true(bp.hit(1.5), "Advanced: Hit should be registered on second pattern sol in second cycle")
+	asserts.is_true(bp.hit(1.75), "Advanced: Hit should be registered on third pattern sol in second cycle")
+	asserts.is_false(bp.hit(0.25), "Advanced: Miss should be registered on second pattern sol in first cycle")
 	
 	bp.pattern = [1, 2, 1]
-	asserts.is_false(bp.hit(0.5), "Miss should be registered on second pattern sol in first cycle")
-	asserts.is_true(bp.hit(1.75), "Hit should be registered on third pattern sol in second cycle")
+	asserts.is_false(bp.hit(0.5), "Advanced 2: Miss should be registered on second pattern sol in first cycle")
+	asserts.is_true(bp.hit(1.75), "Advanced 2: Hit should be registered on third pattern sol in second cycle")
 	
+	bp.pattern = [1, 2, 1, 2, 1]
+	asserts.is_false(bp.hit(1.25), "Moving offbeat: Miss should be registered on fourth pattern sol in first cycle")

@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="1" time="0.01">
-	<testsuite name="Beat Processor Test" failures="0"  tests="6" time="0">
+<testsuites failures="1" name="TestXML" tests="1" time="0.037">
+	<testsuite name="Beat Processor Test" failures="1"  tests="6" time="0">
 		<testcase name=" register hit on beat" time="0"></testcase>
 		<testcase name=" register miss out of beat" time="0"></testcase>
 		<testcase name=" different tempo hit on beat" time="0"></testcase>
 		<testcase name=" register miss if extra hit within buffer" time="0"></testcase>
 		<testcase name=" buffer to hit" time="0"></testcase>
-		<testcase name=" beat on given pattern" time="0"></testcase>
+		<testcase name=" beat on given pattern" time="0">
+			<failure message="EXPECTED: |bool| True == false but GOT |bool| True != false"></failure></testcase>
 	</testsuite>
 
 </testsuites>
