@@ -9,9 +9,10 @@ var _last_time := -1.0
 func hit(time: float) -> bool:
 	var result := false
 	
-	# Check if index is integral, so it's aligned to the beat
+	# Find current index and check if it's close enough to integral index
 	var index := time / 60 * apm
-	if index == floor(index):
+	var buffer := abs(index - round(index))
+	if buffer < 0.15:
 		result = _last_time != time
 			
 	_last_time = time

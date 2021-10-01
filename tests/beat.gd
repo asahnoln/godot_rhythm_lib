@@ -30,3 +30,10 @@ func test_different_tempo_hit_on_beat():
 	bp.apm = 80
 	asserts.is_true(bp.hit(0.75), "Hit should be registered on second beat (0.75)")
 	asserts.is_true(bp.hit(1.5), "Hit should be registered on third beat (1.5)")
+
+
+func test_buffer_to_hit():
+	bp.apm = 120
+	asserts.is_true(bp.hit(9.477333), "Hit should be registered with enough buffer until real beat")
+	asserts.is_true(bp.hit(9.525333), "Hit should be registered with enough buffer after real beat")
+	asserts.is_true(bp.hit(47.557335), "Another buffer hit")
