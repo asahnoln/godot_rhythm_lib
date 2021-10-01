@@ -50,8 +50,12 @@ Display=8
 [application]
 
 config/name="RhythmLib"
-run/main_scene="res://test_gut/tests.tscn"
+run/main_scene="res://scenes/test_beat.tscn"
 config/icon="res://icon.png"
+
+[audio]
+
+output_latency=5
 
 [editor_plugins]
 
