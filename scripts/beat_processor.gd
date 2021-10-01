@@ -14,37 +14,32 @@ func hit(time: float) -> bool:
 	
 	# Find current matra index and check if it's close enough to integral index
 	var index := time / matra_length # 4 is jathi (matras per atcharam)
-	match pattern:
-		[4]:
-			var matras := [1, 0, 0, 0]
-			var close_index := round(index)
-			var buffer := abs(index - close_index)
-			var res := false
-			if buffer < 0.5:
-				res = _last_index != close_index and matras[int(close_index) % 4] == 1
-					
-			_last_index = close_index
-			return res
-		[2, 2]:
-			if int(index) % 4 in [1, 3]:
-				index -= 0.5
-		[1, 1, 1, 1]:
-			pass
-		[2, 1, 1]:
-			if int(index) % 4 == 1:
-				index -= 0.5
-		[1, 2, 1]:
-			if int(index) % 4 == 2:
-				index -= 0.5
-		[1, 2, 1, 2, 1]:
-			if int(index) % 7 in [2, 5]:
-				index -= 0.5
-			
 	var close_index := round(index)
 	var buffer := abs(index - close_index)
-	if buffer < 0.15:
-		result = _last_index != close_index
-			
+	var sum := 0
+	var matras := []
+	match pattern:
+		[4]:
+			matras = [true, false, false, false]
+			sum = 4
+		[2, 2]:
+			matras = [true, false, true, false]
+			sum = 4
+		[1, 1, 1, 1]:
+			matras = [true, true, true, true]
+			sum = 4
+		[2, 1, 1]:
+			matras = [true, false, true, true]
+			sum = 4
+		[1, 2, 1]:
+			matras = [true, true, false, true]
+			sum = 4
+		[1, 2, 1, 2, 1]:
+			matras = [1, 1, 0, 1, 1, 0, 1]
+			sum = 7
+
+	if buffer < 0.5:
+		result = _last_index != close_index and matras[int(close_index) % sum]
+
 	_last_index = close_index
 	return result
-
