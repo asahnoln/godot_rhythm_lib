@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="1" time="0.035">
+<testsuites failures="0" name="TestXML" tests="1" time="0.034">
 	<testsuite name="Beat Processor Test" failures="0"  tests="6" time="0">
 		<testcase name=" register hit on beat" time="0"></testcase>
 		<testcase name=" register miss out of beat" time="0"></testcase>
