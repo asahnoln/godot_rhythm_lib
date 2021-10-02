@@ -7,7 +7,6 @@ var pattern := [4] setget _set_pattern
 
 var _last_index := -1
 var _matras_pattern := [true, false, false, false]
-var _matras_sum := 4
 var _matra_length := 60.0 / apm / JATHI
 
 
@@ -20,7 +19,7 @@ func hit(time: float) -> bool:
 	var buffer := abs(index - close_index)
 
 	if buffer < 0.5:
-		result = _last_index != close_index and _matras_pattern[close_index % _matras_sum]
+		result = _last_index != close_index and _matras_pattern[close_index % _matras_pattern.size()]
 
 	_last_index = close_index
 	return result
@@ -34,11 +33,9 @@ func _set_apm(value: float) -> void:
 
 # Update pattern sum and matras pattern
 func _set_pattern(value: Array) -> void:
-	_matras_sum = 0
 	_matras_pattern = []
 
 	for i in value:
-		_matras_sum += i
 		_matras_pattern.push_back(true)
 		for _i in i - 1:
 			_matras_pattern.push_back(false)
