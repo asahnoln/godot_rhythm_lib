@@ -14,7 +14,7 @@ var _matra_length := 60.0 / apm / JATHI
 # Register hit
 func hit(time: float) -> bool:
 	var result := false
-	
+
 	var index := time / _matra_length
 	var close_index: int = round(index)
 	var buffer := abs(index - close_index)
@@ -26,10 +26,6 @@ func hit(time: float) -> bool:
 	return result
 
 
-func update_time(time: float) -> void:
-	pass
-	
-
 # Update matra length
 func _set_apm(value: float) -> void:
 	apm = value
@@ -40,12 +36,11 @@ func _set_apm(value: float) -> void:
 func _set_pattern(value: Array) -> void:
 	_matras_sum = 0
 	_matras_pattern = []
-	
+
 	for i in value:
 		_matras_sum += i
 		_matras_pattern.push_back(true)
 		for _i in i - 1:
 			_matras_pattern.push_back(false)
-	
+
 	pattern = value
-	
